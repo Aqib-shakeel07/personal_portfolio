@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Aqib Shakeel | Junior SOC Analyst</title>
     <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 </head>
 <body>
-
+<canvas id="bgCanvas"></canvas>
 <header>
     <nav class="navbar">
         <div class="logo">AQIB SHAKEEL</div>
@@ -48,7 +48,7 @@
             </div>
             <div class="hero-image">
                 <div class="image-placeholder">
-                    <img src="assets/images/profile.jpg" alt="Aqib Shakeel" />
+                    <img src="assets/images/preview.webp" alt="Aqib Shakeel" />
                     <div class="gradient-overlay"></div>
                 </div>
             </div>
@@ -69,8 +69,8 @@
                         <i class="fas fa-briefcase"></i>
                         <div>
                             <h4>Current Role</h4>
-                            <p>Junior SOC Analyst at [Company Name]</p>
-                            <p class="highlight">Monitoring 500+ daily alerts • Investigating brute force attempts • Building automation tools</p>
+                            <p>Junior SOC Analyst at MTBC-CareCloud</p>
+                            <p class="highlight">Monitoring 50000+ daily alerts • Investigating brute force attempts • Building automation tools</p>
                         </div>
                     </div>
                     <div class="detail-item">
@@ -87,7 +87,7 @@
             <div class="about-leadership">
                 <h3>Key Achievements</h3>
                 <div class="leadership-card">
-                    <i class="fas fa-shield-halved"></i>
+                    <i class="fas fa-shield-alt"></i>
                     <div>
                         <h4>500+ Suspicious IPs Analyzed</h4>
                         <p>Built a Python-based IP enrichment tool integrating VirusTotal and AbuseIPDB for automated threat intelligence.</p>
@@ -118,11 +118,11 @@
             <div class="exp-card">
                 <div class="exp-header">
                     <h3>Junior SOC Analyst</h3>
-                    <span class="company">[Current Company]</span>
+                    <span class="company">MTBC-CareCloud</span>
                     <span class="date">2025 - Present</span>
                 </div>
                 <ul>
-                    <li>Monitor and triage 500+ security alerts daily using <strong>SolarWinds SEM</strong> SIEM platform</li>
+                    <li>Monitor and triage 50000+ security alerts daily using <strong>SolarWinds SEM</strong> SIEM platform</li>
                     <li>Investigate suspicious logins, brute force attempts, and malware alerts</li>
                     <li>Enrich threat intelligence using <strong>VirusTotal</strong> and <strong>AbuseIPDB</strong> APIs</li>
                     <li>Built Python scripts to automate IP analysis and threat reporting</li>
@@ -160,42 +160,81 @@
     <section id="projects" class="projects">
         <h2>Security Projects</h2>
         <div class="project-grid">
-            <div class="project-card">
-                <div class="project-icon"><i class="fas fa-shield-halved"></i></div>
-                <h3>Suspicious IP Analyzer</h3>
-                <p>Python tool that analyzes SolarWinds SEM logs, enriches IPs with VirusTotal & AbuseIPDB, and generates threat reports.</p>
-                <div class="project-tech"><span>Python</span><span>SolarWinds SEM</span><span>Threat Intel</span></div>
-            </div>
-            <div class="project-card">
-                <div class="project-icon"><i class="fas fa-envelope"></i></div>
-                <h3>Phishing Email Analyzer</h3>
-                <p>Web-based tool that analyzes email headers and content to detect phishing attempts with automated risk scoring.</p>
-                <div class="project-tech"><span>Python</span><span>Flask</span><span>Email Analysis</span></div>
-            </div>
-            <div class="project-card">
-                <div class="project-icon"><i class="fas fa-network-wired"></i></div>
-                <h3>Vulnerability Assessment System</h3>
-                <p>3-zone network lab with Wazuh SIEM, Suricata IDS, and automated vulnerability scoring.</p>
-                <div class="project-tech"><span>Wazuh</span><span>Suricata</span><span>SIEM</span></div>
-            </div>
-            <div class="project-card">
-                <div class="project-icon"><i class="fas fa-robot"></i></div>
-                <h3>DevOps Security Pipeline</h3>
-                <p>CI/CD pipeline with GitHub Actions, Docker, Terraform, and Grafana for security monitoring.</p>
-                <div class="project-tech"><span>Docker</span><span>Terraform</span><span>Grafana</span></div>
-            </div>
-            <div class="project-card">
-                <div class="project-icon"><i class="fas fa-chart-line"></i></div>
-                <h3>Threat Intelligence Dashboard</h3>
-                <p>Real-time dashboard visualizing brute force attempts, threat feed matches, and top attacking IPs.</p>
-                <div class="project-tech"><span>SolarWinds SEM</span><span>Dashboard</span><span>Threat Intel</span></div>
-            </div>
-            <div class="project-card">
-                <div class="project-icon"><i class="fas fa-file-alt"></i></div>
-                <h3>Incident Response Playbook</h3>
-                <p>Created a comprehensive phishing incident response playbook with step-by-step investigation procedures.</p>
-                <div class="project-tech"><span>Incident Response</span><span>Documentation</span><span>IR</span></div>
-            </div>
+            <!-- Project 1 -->
+            <a href="project-ip-analyzer.html" class="project-card-link">
+                <div class="project-card">
+                    <div class="project-icon"><i class="fas fa-shield-alt"></i></div>
+                    <h3>Suspicious IP Analyzer</h3>
+                    <p>Python tool that analyzes SolarWinds SEM logs, enriches IPs with VirusTotal & AbuseIPDB, and generates threat reports.</p>
+                    <div class="project-tech">
+                        <span>Python</span>
+                        <span>SolarWinds SEM</span>
+                        <span>Threat Intel</span>
+                    </div>
+<div class="project-link-wrapper">
+    <span class="project-link">View Details <i class="fas fa-arrow-right"></i></span>
+</div>                </div>
+            </a>
+
+            <!-- Project 2 -->
+            <a href="project-phishing-analyzer.html" class="project-card-link">
+                <div class="project-card">
+                    <div class="project-icon"><i class="fas fa-envelope"></i></div>
+                    <h3>Phishing Email Analyzer</h3>
+                    <p>Web-based tool that analyzes email headers and content to detect phishing attempts with automated risk scoring.</p>
+                    <div class="project-tech"><span>Python</span><span>Flask</span><span>Email Analysis</span></div>
+<div class="project-link-wrapper">
+    <span class="project-link">View Details <i class="fas fa-arrow-right"></i></span>
+</div>                </div>
+            </a>
+
+            <!-- Project 3 -->
+            <a href="project-vulnerability-assessment.html" class="project-card-link">
+                <div class="project-card">
+                    <div class="project-icon"><i class="fas fa-network-wired"></i></div>
+                    <h3>Vulnerability Assessment System</h3>
+                    <p>3-zone network lab with Wazuh SIEM, Suricata IDS, and automated vulnerability scoring.</p>
+                    <div class="project-tech"><span>Wazuh</span><span>Suricata</span><span>SIEM</span></div>
+<div class="project-link-wrapper">
+    <span class="project-link">View Details <i class="fas fa-arrow-right"></i></span>
+</div>                </div>
+            </a>
+
+            <!-- Project 4 -->
+            <a href="project-devops-pipeline.html" class="project-card-link">
+                <div class="project-card">
+                    <div class="project-icon"><i class="fas fa-robot"></i></div>
+                    <h3>DevOps Security Pipeline</h3>
+                    <p>CI/CD pipeline with GitHub Actions, Docker, Terraform, and Grafana for security monitoring.</p>
+                    <div class="project-tech"><span>Docker</span><span>Terraform</span><span>Grafana</span></div>
+<div class="project-link-wrapper">
+    <span class="project-link">View Details <i class="fas fa-arrow-right"></i></span>
+</div>                </div>
+            </a>
+
+            <!-- Project 5 -->
+            <a href="project-threat-dashboard.html" class="project-card-link">
+                <div class="project-card">
+                    <div class="project-icon"><i class="fas fa-chart-line"></i></div>
+                    <h3>Threat Intelligence Dashboard</h3>
+                    <p>Real-time dashboard visualizing brute force attempts, threat feed matches, and top attacking IPs.</p>
+                    <div class="project-tech"><span>SolarWinds SEM</span><span>Dashboard</span><span>Threat Intel</span></div>
+<div class="project-link-wrapper">
+    <span class="project-link">View Details <i class="fas fa-arrow-right"></i></span>
+</div>                </div>
+            </a>
+
+            <!-- Project 6 -->
+            <a href="project-ir-playbook.html" class="project-card-link">
+                <div class="project-card">
+                    <div class="project-icon"><i class="fas fa-file-alt"></i></div>
+                    <h3>Incident Response Playbook</h3>
+                    <p>Created a comprehensive phishing incident response playbook with step-by-step investigation procedures.</p>
+                    <div class="project-tech"><span>Incident Response</span><span>Documentation</span><span>IR</span></div>
+<div class="project-link-wrapper">
+    <span class="project-link">View Details <i class="fas fa-arrow-right"></i></span>
+</div>                </div>
+            </a>
         </div>
     </section>
 
@@ -210,8 +249,8 @@
                     <span>Alert Triage</span>
                     <span>Incident Response</span>
                     <span>Threat Intelligence</span>
+                    <span>Crowdstrike</span>
                     <span>Log Analysis</span>
-                    <span>Threat Hunting</span>
                 </div>
             </div>
             <div class="skill-category">
@@ -269,36 +308,72 @@
     </section>
 
     <!-- Certifications -->
-    <section id="certifications" class="certifications">
-        <h2>Certifications & Training</h2>
-        <div class="cert-grid">
+<section id="certifications" class="certifications">
+    <h2>Certifications & Training</h2>
+    <div class="cert-grid">
+
+        <!-- Cert 1 -->
+        <a href="cert-soc-analyst.html" class="cert-card-link">
             <div class="cert-card">
                 <i class="fas fa-certificate"></i>
                 <h4>TryHackMe SOC Analyst</h4>
                 <p>Hands-on SOC training covering alert triage, SIEM, and incident response</p>
+                <span class="cert-link">View Details <i class="fas fa-arrow-right"></i></span>
             </div>
+        </a>
+
+        <!-- Cert 2 -->
+        <a href="cert-cyberops.html" class="cert-card-link">
             <div class="cert-card">
                 <i class="fas fa-certificate"></i>
                 <h4>Cisco CyberOps Essentials</h4>
                 <p>Core cybersecurity operations and SOC fundamentals</p>
+                <span class="cert-link">View Details <i class="fas fa-arrow-right"></i></span>
             </div>
+        </a>
+
+        <!-- Cert 3 -->
+        <a href="cert-soc-level1.html" class="cert-card-link">
+            <div class="cert-card">
+                <i class="fas fa-certificate"></i>
+                <h4>SOC Analyst Level 1</h4>
+                <p>Foundation-level SOC skills including alert triage and threat detection</p>
+                <span class="cert-link">View Details <i class="fas fa-arrow-right"></i></span>
+            </div>
+        </a>
+
+        <!-- Cert 4 -->
+        <a href="cert-python.html" class="cert-card-link">
             <div class="cert-card">
                 <i class="fas fa-certificate"></i>
                 <h4>Python for Cybersecurity</h4>
-                <p>Python scripting for security automation and analysis</p>
+                <p>Python scripting for security automation, log analysis, and threat hunting</p>
+                <span class="cert-link">View Details <i class="fas fa-arrow-right"></i></span>
             </div>
+        </a>
+
+        <!-- Cert 5 -->
+        <a href="cert-autopsy.html" class="cert-card-link">
             <div class="cert-card">
                 <i class="fas fa-certificate"></i>
                 <h4>Autopsy Digital Forensics</h4>
-                <p>Digital forensics and incident response with Autopsy</p>
+                <p>Digital forensics and incident response using Autopsy and The Sleuth Kit</p>
+                <span class="cert-link">View Details <i class="fas fa-arrow-right"></i></span>
             </div>
+        </a>
+
+        <!-- Cert 6 -->
+        <a href="cert-security-plus.html" class="cert-card-link">
             <div class="cert-card">
                 <i class="fas fa-certificate"></i>
                 <h4>CompTIA Security+</h4>
-                <p>In Progress - Expected 2026</p>
+                <p>In Progress — Expected completion 2026</p>
+                <span class="cert-link">View Details <i class="fas fa-arrow-right"></i></span>
             </div>
-        </div>
-    </section>
+        </a>
+
+    </div>
+</section>
 
     <!-- Contact -->
     <section id="contact" class="contact">

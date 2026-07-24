@@ -1,12 +1,13 @@
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 :root {
-    --primary: #FF6B00;
+   --primary: #FF6B00;
     --primary-dark: #E55A00;
     --bg: #0D0D0D;
     --card-bg: #1A1A1A;
     --border: #2A2A2A;
     --text: #E0E0E0;
+    --text-muted: #999;
     --gradient: linear-gradient(135deg, #FF6B00, #E55A00);
 }
 
@@ -158,4 +159,708 @@ footer { background: var(--card-bg); padding: 3rem 5%; margin-top: 3rem; border-
     .contact-info { grid-template-columns: 1fr; }
     .hero-contact { flex-direction: column; gap: 0.5rem; }
     .hero-buttons { flex-direction: column; align-items: center; }
+}
+/* ===== PROJECT CARDS - TRANSPARENT + ANIMATIONS ===== */
+
+.project-card {
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    padding: 2rem 1.8rem;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    text-align: center;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    position: relative;
+    overflow: hidden;
+    min-height: 320px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+/* Glass reflection */
+.project-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.03), transparent 60%);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.6s;
+}
+
+.project-card:hover::before {
+    opacity: 1;
+}
+
+/* Hover effect */
+.project-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* Title - white */
+.project-card h3 {
+    color: #fff;
+    font-size: 1.3rem;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    margin-bottom: 0.5rem;
+    transition: color 0.3s;
+}
+
+.project-card:hover h3 {
+    color: var(--primary);
+}
+
+/* Description - light gray */
+.project-card p {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.95rem;
+    font-weight: 400;
+    line-height: 1.6;
+    flex-grow: 1;
+    margin-bottom: 1.2rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* Tech Tags - white transparent */
+.project-tech span {
+    padding: 0.3rem 1rem;
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+    border-radius: 50px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: rgba(255, 255, 255, 0.6);
+    transition: all 0.3s ease;
+}
+
+.project-tech span:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+/* View Details Button - white border */
+.project-link {
+    padding: 0.5rem 1.8rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    border-radius: 50px;
+    border: 1.5px solid rgba(255, 255, 255, 0.2);
+    background: transparent;
+    color: rgba(255, 255, 255, 0.7);
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    cursor: pointer;
+    margin-top: 0.5rem;
+    justify-content: center;
+}
+
+.project-link:hover {
+    background: var(--primary);
+    color: #fff !important;
+    border-color: var(--primary);
+    box-shadow: 0 0 30px rgba(255, 107, 0, 0.2);
+    transform: scale(1.03);
+}
+
+.project-link i {
+    transition: transform 0.3s ease;
+}
+
+.project-link:hover i {
+    transform: translateX(4px);
+}
+
+.project-link-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 0.5rem;
+}
+/* ===== CARD HOVER - ORANGE GLOW ===== */
+
+.project-card:hover {
+    border-color: var(--primary) !important;
+    box-shadow: 0 0 40px rgba(255, 107, 0, 0.3), 0 15px 50px rgba(0, 0, 0, 0.3) !important;
+    background: rgba(255, 107, 0, 0.12) !important;
+}
+
+.project-card:hover h3 {
+    color: var(--primary) !important;
+}
+
+.project-card:hover .project-icon {
+    color: var(--primary) !important;
+    text-shadow: 0 0 40px rgba(255, 107, 0, 0.5) !important;
+}
+
+.project-card:hover .project-tech span {
+    border-color: var(--primary) !important;
+    color: var(--primary) !important;
+    background: rgba(255, 107, 0, 0.15) !important;
+}
+
+.project-card:hover .project-link {
+    background: var(--primary) !important;
+    color: white !important;
+    border-color: var(--primary) !important;
+    box-shadow: 0 0 30px rgba(255, 107, 0, 0.3) !important;
+}
+.project-card:nth-child(1) { animation-delay: 0.1s; }
+.project-card:nth-child(2) { animation-delay: 0.2s; }
+.project-card:nth-child(3) { animation-delay: 0.3s; }
+.project-card:nth-child(4) { animation-delay: 0.4s; }
+.project-card:nth-child(5) { animation-delay: 0.5s; }
+.project-card:nth-child(6) { animation-delay: 0.6s; }
+
+
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ===== BORDER GLOW ON HOVER ===== */
+.project-card {
+    position: relative;
+}
+
+.project-card .glow-border {
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    border-radius: 18px;
+    background: linear-gradient(45deg, transparent, var(--primary), transparent);
+    opacity: 0;
+    transition: opacity 0.5s;
+    z-index: -1;
+}
+
+.project-card:hover .glow-border {
+    opacity: 1;
+}
+/* ===== SKILLS CARDS - TRANSPARENT + ANIMATIONS ===== */
+
+
+.skill-category {
+    background: rgba(20, 20, 20, 0.3);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    padding: 2rem;
+    border-radius: 16px;
+    border: 1px solid rgba(255, 107, 0, 0.15);
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Glass reflection */
+.skill-category::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at 30% 30%, rgba(255, 107, 0, 0.05), transparent 60%);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.6s;
+}
+
+.skill-category:hover::before {
+    opacity: 1;
+}
+
+/* Hover effect */
+.skill-category:hover {
+    transform: translateY(-8px) scale(1.02);
+    border-color: var(--primary);
+    box-shadow: 0 20px 60px rgba(255, 107, 0, 0.2);
+    background: rgba(20, 20, 20, 0.5);
+}
+
+/* Glow line */
+.skill-category::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: -100%;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--primary), transparent);
+    transition: left 0.6s ease;
+}
+
+.skill-category:hover::after {
+    left: 0;
+}
+
+/* Skill category title */
+.skill-category h3 {
+    color: var(--primary);
+    margin-bottom: 1rem;
+    font-weight: 700;
+    font-size: 1.1rem;
+    transition: text-shadow 0.3s;
+}
+
+.skill-category:hover h3 {
+    text-shadow: 0 0 30px rgba(255, 107, 0, 0.3);
+}
+
+/* Skill tags */
+.skill-tags span {
+    background: rgba(10, 10, 10, 0.6);
+    padding: 0.4rem 1.2rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-family: 'Fira Code', monospace;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    color: #ddd;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.skill-category:hover .skill-tags span {
+    border-color: var(--primary);
+    color: var(--primary);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(255, 107, 0, 0.1);
+}
+
+/* Staggered animation */
+.skill-category {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 0.6s ease forwards;
+}
+.skill-category:hover {
+    border-color: var(--primary) !important;
+    box-shadow: 0 0 40px rgba(255, 107, 0, 0.2) !important;
+    background: rgba(255, 107, 0, 0.1) !important;
+}
+
+.skill-category:nth-child(1) { animation-delay: 0.1s; }
+.skill-category:nth-child(2) { animation-delay: 0.2s; }
+.skill-category:nth-child(3) { animation-delay: 0.3s; }
+.skill-category:nth-child(4) { animation-delay: 0.4s; }
+.skill-category:nth-child(5) { animation-delay: 0.5s; }
+.skill-category:nth-child(6) { animation-delay: 0.6s; }
+
+/* ===== CERTIFICATION CARDS - CLEAN VERSION ===== */
+
+.cert-card-link {
+    text-decoration: none !important;
+    color: inherit !important;
+    display: block;
+}
+
+.cert-card-link:link,
+.cert-card-link:visited,
+.cert-card-link:hover,
+.cert-card-link:active,
+.cert-card-link:focus {
+    text-decoration: none !important;
+    color: inherit !important;
+    outline: none !important;
+    border: none !important;
+    -webkit-tap-highlight-color: transparent !important;
+}
+
+.cert-card {
+    background: rgba(20, 20, 20, 0.3);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    padding: 2rem 1.5rem;
+    border-radius: 16px;
+    border: 1px solid rgba(255, 107, 0, 0.15);
+    text-align: center;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 220px;
+}
+
+/* Glass reflection */
+.cert-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at 30% 30%, rgba(255, 107, 0, 0.05), transparent 60%);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.6s;
+}
+
+.cert-card:hover::before {
+    opacity: 1;
+}
+
+/* Hover effect - shorter lift */
+.cert-card:hover {
+    transform: translateY(-8px);
+    border-color: var(--primary);
+    box-shadow: 0 15px 50px rgba(255, 107, 0, 0.15);
+    background: rgba(20, 20, 20, 0.5);
+}
+
+/* Glow line */
+.cert-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: -100%;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--primary), transparent);
+    transition: left 0.5s ease;
+}
+
+.cert-card:hover::after {
+    left: 0;
+}
+
+/* Icon */
+.cert-card i {
+    font-size: 2.5rem;
+    color: var(--primary);
+    margin-bottom: 0.7rem;
+    display: inline-block;
+    transition: all 0.4s ease;
+}
+
+.cert-card:hover i {
+    transform: scale(1.15) rotate(-3deg);
+    text-shadow: 0 0 30px rgba(255, 107, 0, 0.3);
+}
+
+/* Title */
+.cert-card h4 {
+    color: var(--text);
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin-bottom: 0.4rem;
+    transition: color 0.3s;
+    letter-spacing: 0.2px;
+}
+
+.cert-card:hover h4 {
+    color: var(--primary);
+}
+
+/* Description */
+.cert-card p {
+    color: #aaa;
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+    font-size: 0.92rem;
+    font-weight: 400;
+    line-height: 1.5;
+    transition: color 0.3s;
+    max-width: 90%;
+    margin: 0 auto;
+}
+
+.cert-card:hover p {
+    color: #ccc;
+}
+
+/* View Details Button */
+.cert-link {
+    margin-top: 1rem;
+    padding: 0.35rem 1.2rem;
+    border: 1.5px solid var(--primary);
+    border-radius: 50px;
+    background: transparent;
+    color: var(--primary);
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+    font-weight: 500;
+    font-size: 0.78rem;
+    letter-spacing: 0.3px;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    cursor: pointer;
+    text-decoration: none !important;
+}
+
+.cert-card:hover .cert-link {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.cert-link:hover {
+    background: var(--primary);
+    color: white !important;
+    box-shadow: 0 0 25px rgba(255, 107, 0, 0.2);
+}
+
+.cert-link i {
+    transition: transform 0.3s ease;
+    font-size: 0.7rem;
+}
+
+.cert-link:hover i {
+    transform: translateX(4px);
+}
+
+/* Staggered animation */
+.cert-card {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.5s ease forwards;
+}
+.cert-card:hover {
+    border-color: var(--primary) !important;
+    box-shadow: 0 0 40px rgba(255, 107, 0, 0.2) !important;
+    background: rgba(255, 107, 0, 0.1) !important;
+}
+.cert-card:nth-child(1) { animation-delay: 0.05s; }
+.cert-card:nth-child(2) { animation-delay: 0.1s; }
+.cert-card:nth-child(3) { animation-delay: 0.15s; }
+.cert-card:nth-child(4) { animation-delay: 0.2s; }
+.cert-card:nth-child(5) { animation-delay: 0.25s; }
+.cert-card:nth-child(6) { animation-delay: 0.3s; }
+
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+.project-card {
+    height: auto !important;
+    min-height: 320px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.project-card p {
+    flex-grow: 1;
+}
+
+/* Fix project link visibility */
+.project-link {
+    margin-top: auto;
+    padding-top: 1rem;
+}
+/* Remove all link styling */
+.project-card-link,
+.project-card-link:link,
+.project-card-link:visited,
+.project-card-link:hover,
+.project-card-link:active,
+.project-card-link:focus {
+    text-decoration: none !important;
+    color: inherit !important;
+    outline: none !important;
+    border: none !important;
+    -webkit-tap-highlight-color: transparent !important;
+}
+
+.project-card-link .project-card {
+    text-decoration: none !important;
+    color: inherit !important;
+}
+/* View Details Button - Orange + Zoom Animation */
+.project-link {
+    margin-top: 1.2rem;
+    color: var(--primary);
+    font-weight: 600;
+    font-size: 0.9rem;
+    opacity: 0;
+    transform: translateY(10px) scale(0.9);
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    cursor: pointer;
+}
+
+/* Show on hover */
+.project-card:hover .project-link {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+/* Hover effect on the button itself */
+.project-link:hover {
+    color: var(--primary) !important;
+    transform: scale(1.15) !important;
+    text-shadow: 0 0 20px rgba(255, 107, 0, 0.4);
+}
+
+/* Arrow animation */
+.project-link i {
+    transition: transform 0.4s ease;
+    display: inline-block;
+}
+
+.project-link:hover i {
+    transform: translateX(8px) scale(1.2);
+}
+
+/* Glow pulse on hover */
+.project-link::after {
+    content: '';
+    position: absolute;
+    top: -4px;
+    left: -4px;
+    right: -4px;
+    bottom: -4px;
+    border-radius: 50px;
+    background: rgba(255, 107, 0, 0.1);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    z-index: -1;
+}
+
+.project-link:hover::after {
+    opacity: 1;
+}
+/* ===== VIEW DETAILS BUTTON - IMPROVED ===== */
+
+/* Wrapper to center the button */
+.project-link-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: auto;
+    padding-top: 1rem;
+}
+
+/* Make it a real button */
+.project-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.5rem 1.5rem;
+    border: 2px solid var(--primary);
+    border-radius: 50px;
+    background: transparent;
+    color: var(--primary);
+    font-weight: 600;
+    font-size: 0.85rem;
+    opacity: 0;
+    transform: translateY(10px) scale(0.9);
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    cursor: pointer;
+    position: relative;
+}
+
+/* Show on card hover */
+.project-card:hover .project-link {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+/* Hover effect */
+.project-link:hover {
+    background: var(--primary);
+    color: white !important;
+    transform: scale(1.08) !important;
+    box-shadow: 0 0 30px rgba(255, 107, 0, 0.3);
+    border-color: var(--primary);
+}
+
+/* Arrow animation */
+.project-link i {
+    transition: transform 0.3s ease;
+}
+
+.project-link:hover i {
+    transform: translateX(6px);
+}
+
+/* Make project-link relative for pseudo-element */
+.project-link {
+    position: relative;
+}
+/* Remove all link styling from certification cards */
+.cert-card-link,
+.cert-card-link:link,
+.cert-card-link:visited,
+.cert-card-link:hover,
+.cert-card-link:active,
+.cert-card-link:focus {
+    text-decoration: none !important;
+    color: inherit !important;
+    outline: none !important;
+    border: none !important;
+    -webkit-tap-highlight-color: transparent !important;
+}
+
+.cert-card-link .cert-card {
+    text-decoration: none !important;
+    color: inherit !important;
+}
+
+.cert-card:nth-child(1) { animation-delay: 0.1s; }
+.cert-card:nth-child(2) { animation-delay: 0.2s; }
+.cert-card:nth-child(3) { animation-delay: 0.3s; }
+.cert-card:nth-child(4) { animation-delay: 0.4s; }
+.cert-card:nth-child(5) { animation-delay: 0.5s; }
+.cert-card:nth-child(6) { animation-delay: 0.6s; }
+
+/* ===== CANVAS BACKGROUND ===== */
+#bgCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+    pointer-events: none;
+}
+/* Center hero image */
+.hero-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.image-placeholder {
+    margin: 0 auto;
 }
