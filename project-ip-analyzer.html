@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Suspicious IP Analyzer | Aqib Shakeel</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <style>
+        .project-detail {
+            padding-top: 120px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .project-detail h1 {
+            font-size: 2.8rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+        }
+        .project-detail .meta {
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+        .project-detail .meta span {
+            background: rgba(255,107,0,0.1);
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            border: 1px solid rgba(255,107,0,0.15);
+        }
+        .project-detail .hero-img {
+            width: 100%;
+            height: 400px;
+            background: var(--card-bg);
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            overflow: hidden;
+        }
+        .project-detail .hero-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .project-detail h2 {
+            font-size: 1.8rem;
+            text-align: left;
+            margin: 2rem 0 1rem;
+            -webkit-text-fill-color: var(--text);
+            background: none;
+        }
+        .project-detail h2::after {
+            margin: 0.5rem 0 0;
+        }
+        .project-detail p {
+            color: #ccc;
+            font-size: 1.05rem;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+        .project-detail ul {
+            list-style: none;
+            margin: 1rem 0;
+        }
+        .project-detail ul li {
+            padding: 0.5rem 0 0.5rem 1.8rem;
+            position: relative;
+            color: #ccc;
+        }
+        .project-detail ul li::before {
+            content: '▸';
+            color: var(--primary);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin: 1.5rem 0;
+        }
+        .tech-stack span {
+            background: rgba(255,107,0,0.1);
+            padding: 0.4rem 1.2rem;
+            border-radius: 20px;
+            border: 1px solid rgba(255,107,0,0.15);
+            color: var(--primary);
+            font-family: 'Fira Code', monospace;
+            font-size: 0.85rem;
+        }
+        .back-btn {
+            display: inline-block;
+            margin-top: 2rem;
+            padding: 0.8rem 2rem;
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+        .back-btn:hover {
+            background: var(--primary);
+            color: white;
+        }
+        .screenshots {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        .screenshots .screenshot {
+            background: var(--card-bg);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+        .screenshots .screenshot img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 12px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <nav class="navbar">
+        <div class="logo">AS</div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html#projects">Projects</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+        <div class="hamburger">
+            <span></span><span></span><span></span>
+        </div>
+    </nav>
+</header>
+
+<main>
+    <section class="project-detail">
+        <h1>Suspicious IP Analyzer</h1>
+        <div class="meta">
+            <span><i class="fas fa-calendar"></i> 2025</span>
+            <span><i class="fas fa-tag"></i> Python</span>
+            <span><i class="fas fa-shield-alt"></i> Threat Intelligence</span>
+        </div>
+
+        <div class="hero-img">
+            <img src="assets/images/projects/ip-analyzer.jpg" alt="IP Analyzer Dashboard" />
+        </div>
+
+        <h2>Overview</h2>
+        <p>
+            The Suspicious IP Analyzer is a Python-based tool that automates the analysis of SolarWinds SEM logs. It enriches IP addresses using VirusTotal and AbuseIPDB APIs, providing actionable threat intelligence for SOC analysts.
+        </p>
+
+        <h2>Key Features</h2>
+        <ul>
+            <li>Parses SolarWinds SEM log files for suspicious IPs</li>
+            <li>Enriches IPs with VirusTotal and AbuseIPDB data</li>
+            <li>Generates detailed threat reports in PDF/CSV</li>
+            <li>Identifies brute force patterns and malicious activity</li>
+            <li>Reduces manual threat analysis time by 70%</li>
+        </ul>
+
+        <h2>Tech Stack</h2>
+        <div class="tech-stack">
+            <span>Python</span>
+            <span>VirusTotal API</span>
+            <span>AbuseIPDB API</span>
+            <span>Pandas</span>
+            <span>ReportLab</span>
+            <span>SolarWinds SEM</span>
+        </div>
+
+        <h2>Screenshots</h2>
+        <div class="screenshots">
+            <div class="screenshot"><img src="assets/images/projects/ip-analyzer-1.jpg" alt="Screenshot 1" /></div>
+            <div class="screenshot"><img src="assets/images/projects/ip-analyzer-2.jpg" alt="Screenshot 2" /></div>
+            <div class="screenshot"><img src="assets/images/projects/ip-analyzer-3.jpg" alt="Screenshot 3" /></div>
+        </div>
+
+        <h2>Impact</h2>
+        <p>
+            This tool was deployed in a SOC environment, reducing alert triage time by 40% and enabling analysts to quickly identify and block malicious IPs. Over 500+ suspicious IPs were analyzed in the first month.
+        </p>
+
+        <a href="index.html#projects" class="back-btn"><i class="fas fa-arrow-left"></i> Back to Projects</a>
+    </section>
+</main>
+
+<footer>
+    <div class="footer-content">
+        <div class="footer-logo">AS</div>
+        <p>&copy; 2026 Aqib Shakeel. All rights reserved.</p>
+        <div class="footer-links">
+            <a href="index.html">Home</a>
+            <a href="index.html#projects">Projects</a>
+            <a href="index.html#contact">Contact</a>
+        </div>
+    </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
