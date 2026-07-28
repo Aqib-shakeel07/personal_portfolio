@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-box">
+            <div class="login-header">
+                <i class="fas fa-shield-halved" style="font-size:3rem;color:#FF6B00;"></i>
+                <h1>Admin Login</h1>
+                <p>Enter credentials</p>
+            </div>
+            <form id="login-form">
+                <div class="input-group">
+                    <label><i class="fas fa-user"></i> Username</label>
+                    <input type="text" id="username" placeholder="admin" required>
+                </div>
+                <div class="input-group">
+                    <label><i class="fas fa-lock"></i> Password</label>
+                    <input type="password" id="password" placeholder="admin123" required>
+                </div>
+                <button type="submit" class="btn">Login</button>
+            </form>
+            <p style="text-align:center;color:#666;margin-top:1rem;font-size:0.9rem;">Default: admin / admin123</p>
+        </div>
+    </div>
+    <script>
+        document.getElementById('login-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const u = document.getElementById('username').value;
+            const p = document.getElementById('password').value;
+            if (u === 'admin' && p === 'admin123') {
+                localStorage.setItem('adminAuth', 'true');
+                window.location.href = 'dashboard.html';
+            } else {
+                alert('❌ Invalid credentials');
+            }
+        });
+    </script>
+</body>
+</html>

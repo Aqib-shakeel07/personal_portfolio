@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="admin-container">
+        <aside class="sidebar">
+            <div class="sidebar-header"><h2>AS</h2><p>Admin</p></div>
+            <nav class="sidebar-nav">
+                <a href="#" class="active"><i class="fas fa-chart-pie"></i> <span>Dashboard</span></a>
+                <a href="#" id="logout"><i class="fas fa-sign-out-alt"></i> <span>Logout</span></a>
+            </nav>
+        </aside>
+        <main class="admin-main">
+            <header class="admin-header">
+                <h1>Dashboard</h1>
+                <div class="admin-user"><span>Admin</span> <i class="fas fa-user-circle"></i></div>
+            </header>
+            <div class="stats-grid">
+                <div class="stat-card"><div class="stat-icon"><i class="fas fa-envelope"></i></div><div><h3 id="total">0</h3><p>Total</p></div></div>
+                <div class="stat-card"><div class="stat-icon"><i class="fas fa-envelope-open"></i></div><div><h3 id="unread">0</h3><p>Unread</p></div></div>
+                <div class="stat-card"><div class="stat-icon"><i class="fas fa-clock"></i></div><div><h3 id="last">-</h3><p>Last Message</p></div></div>
+            </div>
+            <div class="messages-section">
+                <h2>Messages</h2>
+                <div id="messages-list"></div>
+            </div>
+        </main>
+    </div>
+    <script>
+        const API = 'http://localhost:5000/api';
+        if (!localStorage.getItem('adminAuth')) window.location.href = 'login.html';
+
+        async function load() {
+            try {
+                const s = await (await fetch(`${API}/admin/stats`)).json();
+                document.getElementById('total').textContent = s.totalMessages || 0;
+                document.getElementById('unread').textContent = s.unreadMessages || 0;
+                document.getElementById('last').textContent = s.lastMessage ? new Date(s.lastMessage.createdAt).toLocaleDateString() : '-';
+
+                const msgs = await (await fetch(`${API}/admin/messages`)).json();
+                const container = document.getElementById('messages-list');
+                if (!msgs.length) return container.innerHTML = '<div class="no-messages">📭 No messages</div>';
+                container.innerHTML = msgs.map(m => `
+                    <div class="message-item ${m.read ? '' : 'unread'}">
+                        <div class="message-header"><strong>${m.name}</strong> <span>${m.email} • ${new Date(m.createdAt).toLocaleString()}</span></div>
+                        <p>${m.message}</p>
+                        <div class="message-actions">
+                            ${!m.read ? `<button onclick="mark('${m.id}')" class="btn-small"><i class="fas fa-check"></i> Read</button>` : ''}
+                            <button onclick="del('${m.id}')" class="btn-small btn-danger"><i class="fas fa-trash"></i> Delete</button>
+                        </div>
+                    </div>
+                `).join('');
+            } catch (e) { document.getElementById('messages-list').innerHTML = '<div class="no-messages">⚠️ Error</div>'; }
+        }
+
+        async function mark(id) { await fetch(`${API}/admin/messages/${id}`, { method: 'PUT' }); load(); }
+        async function del(id) { if (confirm('Delete?')) { await fetch(`${API}/admin/messages/${id}`, { method: 'DELETE' }); load(); } }
+
+        document.getElementById('logout').addEventListener('click', () => { localStorage.removeItem('adminAuth'); window.location.href = 'login.html'; });
+        load();
+        setInterval(load, 30000);
+    </script>
+</body>
+</html>
