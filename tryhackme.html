@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TryHackMe Progress | </title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <style>
+        /* ----- global reset / base (align left) ----- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #0b0d11;
+            color: #f0f0f0;
+            font-family: 'Inter', 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ----- header / nav (keeps original style) ----- */
+        header {
+            width: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            background: rgba(11, 13, 17, 0.85);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .navbar {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1.2rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.4rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            background: linear-gradient(135deg, #ff6b00, #ff8c00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 2.2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: rgba(255, 255, 255, 0.7);
+            font-weight: 500;
+            transition: 0.3s;
+            font-size: 1rem;
+        }
+
+        .nav-links a:hover {
+            color: #ff6b00;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+        }
+
+        .hamburger span {
+            width: 26px;
+            height: 2.5px;
+            background: #fff;
+            border-radius: 4px;
+            transition: 0.3s;
+        }
+
+        /* ----- main container: ALL left-aligned ----- */
+        .tryhackme-detail {
+            padding-top: 120px;
+            max-width: 2000px;
+            padding-left: 3rem;
+            padding-right: 3rem;
+            text-align: left;          /* global left alignment */
+            width: 100%;
+            flex: 1;
+        }
+
+        /* force all children to inherit left alignment */
+        .tryhackme-detail * {
+            text-align: left !important;
+        }
+
+        /* ----- header with rooms box ----- */
+        .tryhackme-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .tryhackme-header .left {
+            flex: 1;
+        }
+
+        .tryhackme-header .left h1 {
+            font-size: 3.2rem;
+            font-family: 'Inter', 'Segoe UI', sans-serif;
+            font-weight: 800;
+            background: linear-gradient(135deg, #ff6b00, #ff8c00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        .tryhackme-header .left .subtitle {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 1.4rem;
+            font-weight: 400;
+        }
+
+        /* ----- rooms box (left aligned inside) ----- */
+        .rooms-box {
+            background: rgba(206, 183, 183, 0.04);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 16px;
+            padding: 1.5rem 2rem;
+            min-width: 220px;
+            border-left: 7px solid #d48f5e;
+            flex-shrink: 0;
+        }
+
+        .rooms-box .box-label {
+            color: rgba(197, 170, 170, 0.4);
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+        }
+
+        .rooms-box .box-number {
+            font-size: 7.8rem;
+            font-weight: 700;
+            color: #e0a981;
+            line-height: 1.2;
+        }
+
+        .rooms-box .box-rooms-list {
+            margin-top: 0.8rem;
+        }
+
+        .rooms-box .box-rooms-list .room-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.25rem 0;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.85rem;
+            font-weight: 400;
+        }
+
+        .rooms-box .box-rooms-list .room-item i {
+            color: #4caf50;
+            font-size: 0.7rem;
+        }
+
+        .rooms-box .box-rooms-list .room-item.in-progress i {
+            color: #ff9800;
+        }
+
+        .rooms-box .box-rooms-list .room-item.planned i {
+            color: #6495ed;
+        }
+
+        /* ----- stats grid ----- */
+        .tryhackme-detail .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .tryhackme-detail .stat-box {
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 16px;
+            padding: 1.8rem 1.5rem;
+        }
+
+        .tryhackme-detail .stat-box h3 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: #ff6b00;
+        }
+
+        .tryhackme-detail .stat-box p {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 1rem;
+            font-weight: 400;
+        }
+
+        /* ----- headings ----- */
+        .tryhackme-detail h2 {
+            font-size: 3.4rem;
+            font-weight: 700;
+            margin: 2.5rem 0 1.2rem;
+            color: #f0f0f0;
+            -webkit-text-fill-color: #f0f0f0;
+            background: none;
+        }
+
+        /* ----- room cards ----- */
+        .room-card {
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 16px;
+            padding: 1.8rem 2.2rem;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .room-card:hover {
+            border-color: #ff6b00;
+            transform: translateX(5px);
+            box-shadow: 0 8px 30px rgba(255, 107, 0, 0.08);
+        }
+
+        .room-card .room-info h4 {
+            color: #f0f0f0;
+            font-size: 1.4rem;
+            font-weight: 600;
+        }
+
+        .room-card .room-info p {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 1.05rem;
+            font-weight: 400;
+        }
+
+        .room-card .room-badge {
+            padding: 0.4rem 1.4rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .room-badge.completed {
+            background: rgba(0, 255, 100, 0.12);
+            border: 1px solid rgba(0, 255, 100, 0.2);
+            color: #4caf50;
+        }
+
+        .room-badge.in-progress {
+            background: rgba(255, 165, 0, 0.12);
+            border: 1px solid rgba(255, 165, 0, 0.2);
+            color: #ff9800;
+        }
+
+        .room-badge.planned {
+            background: rgba(100, 150, 255, 0.12);
+            border: 1px solid rgba(100, 150, 255, 0.2);
+            color: #6495ed;
+        }
+
+        /* ----- journey / blog section ----- */
+        .journey-section {
+            margin-top: 3rem;
+        }
+
+        .journey-entry {
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 16px;
+            padding: 1.8rem 2.2rem;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+            border-left: 4px solid #ff6b00;
+        }
+
+        .journey-entry:hover {
+            border-color: #ff6b00;
+            transform: translateX(5px);
+            box-shadow: 0 8px 30px rgba(255, 107, 0, 0.08);
+        }
+
+        .journey-entry .entry-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .journey-entry .entry-header h4 {
+            color: #f0f0f0;
+            font-size: 1.4rem;
+            font-weight: 600;
+        }
+
+        .journey-entry .entry-date {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 1rem;
+            font-weight: 400;
+        }
+
+        .journey-entry .entry-content {
+            color: rgba(255, 255, 255, 0.75);
+            font-size: 1.1rem;
+            font-weight: 400;
+            line-height: 1.8;
+        }
+
+        .journey-entry .entry-content ul {
+            list-style: none;
+            padding: 0;
+            margin: 0.5rem 0;
+        }
+
+        .journey-entry .entry-content ul li {
+            padding: 0.4rem 0 0.4rem 1.8rem;
+            position: relative;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1.05rem;
+            font-weight: 400;
+        }
+
+        .journey-entry .entry-content ul li::before {
+            content: '▸';
+            color: #ff6b00;
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        .journey-entry .entry-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin-top: 0.8rem;
+        }
+
+        .journey-entry .entry-tags span {
+            padding: 0.3rem 1rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            color: rgba(255, 255, 255, 0.5);
+            transition: all 0.3s ease;
+        }
+
+        .journey-entry .entry-tags span:hover {
+            border-color: #ff6b00;
+            color: #ff6b00;
+        }
+
+        /* ----- back button ----- */
+        .back-btn {
+            display: inline-block;
+            margin-top: 2rem;
+            padding: 0.9rem 2.5rem;
+            background: transparent;
+            border: 2px solid #ff6b00;
+            color: #ff6b00;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            font-family: 'Inter', 'Segoe UI', sans-serif;
+            transition: 0.3s;
+        }
+
+        .back-btn:hover {
+            background: #ff6b00;
+            color: white;
+        }
+
+        /* ----- footer ----- */
+        footer {
+            margin-top: 4rem;
+            padding: 2rem 3rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            background: rgba(11, 13, 17, 0.7);
+            backdrop-filter: blur(8px);
+            width: 100%;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+
+        .footer-logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #ff6b00;
+        }
+
+        .footer-content p {
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 0.9rem;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.4);
+            text-decoration: none;
+            font-weight: 500;
+            transition: 0.3s;
+            font-size: 0.95rem;
+        }
+
+        .footer-links a:hover {
+            color: #ff6b00;
+        }
+
+        /* ----- responsive ----- */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 1rem 1.5rem;
+            }
+            .nav-links {
+                display: none;
+            }
+            .hamburger {
+                display: flex;
+            }
+            .tryhackme-detail {
+                padding-left: 1.5rem;
+                padding-right: 1.5rem;
+                padding-top: 100px;
+            }
+            .tryhackme-header {
+                flex-direction: column;
+            }
+            .tryhackme-detail h1 {
+                font-size: 2.4rem;
+            }
+            .room-card {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 1.2rem 1.5rem;
+            }
+            .journey-entry {
+                padding: 1.2rem 1.5rem;
+            }
+            .journey-entry .entry-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .tryhackme-detail h2 {
+                font-size: 1.8rem;
+            }
+            .tryhackme-detail .stat-box h3 {
+                font-size: 2.2rem;
+            }
+            .rooms-box {
+                width: 100%;
+            }
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            .footer-content * {
+                text-align: center !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <nav class="navbar">
+        <div class="logo">AQIB SHAKEEL</div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html#profiles">Profiles</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+        <div class="hamburger">
+            <span></span><span></span><span></span>
+        </div>
+    </nav>
+</header>
+
+<main>
+    <section class="tryhackme-detail">
+
+        <!-- ===== HEADER WITH ROOMS BOX ===== -->
+        <div class="tryhackme-header">
+            <div class="left">
+                <h1>TryHackMe Progress</h1>
+                <p class="subtitle">My journey through hands-on cybersecurity training — rooms completed, skills learned, and certifications earned.</p>
+            </div>
+
+            <!-- ===== ROOMS COMPLETED BOX ===== -->
+            <div class="rooms-box">
+                <div class="box-label">Rooms Completed</div>
+                <div class="box-number">4</div>
+                <div class="box-rooms-list">
+    
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== STATS ===== -->
+        <div class="stats-grid">
+            <div class="stat-box">
+                <h3>50+</h3>
+                <p>Rooms Completed</p>
+            </div>
+            <div class="stat-box">
+                <h3>Top 5%</h3>
+                <p>Global Ranking</p>
+            </div>
+            <div class="stat-box">
+                <h3>10+</h3>
+                <p>Learning Paths</p>
+            </div>
+            <div class="stat-box">
+                <h3>2</h3>
+                <p>Certifications</p>
+            </div>
+        </div>
+
+        <!-- ===== COMPLETED ROOMS ===== -->
+        <h2>Completed Rooms</h2>
+
+        <div class="room-card">
+            <div class="room-info">
+                <h4>Intro to Cybersecurity</h4>
+                <p>Fundamental concepts of cybersecurity, threat actors, and defense strategies.</p>
+            </div>
+            <span class="room-badge completed">✅ Completed</span>
+        </div>
+
+        <div class="room-card">
+            <div class="room-info">
+                <h4>Network Fundamentals</h4>
+                <p>OSI model, TCP/IP, networking devices, and basic packet analysis.</p>
+            </div>
+            <span class="room-badge completed">✅ Completed</span>
+        </div>
+
+        <div class="room-card">
+            <div class="room-info">
+                <h4>Intro to SIEM</h4>
+                <p>Understanding Security Information and Event Management tools and their role in SOC.</p>
+            </div>
+            <span class="room-badge completed">✅ Completed</span>
+        </div>
+
+        <div class="room-card">
+            <div class="room-info">
+                <h4>Intro to Log Analysis</h4>
+                <p>Analyzing logs to detect suspicious activity and investigate security incidents.</p>
+            </div>
+            <span class="room-badge in-progress">🔄 In Progress</span>
+        </div>
+
+        <div class="room-card">
+            <div class="room-info">
+                <h4>Phishing Analysis</h4>
+                <p>Identifying and analyzing phishing emails, malicious attachments, and URLs.</p>
+            </div>
+            <span class="room-badge planned">📋 Planned</span>
+        </div>
+        <div class="room-card">
+            <div class="room-info">
+                <h4>SOC L1 Alert Triage & Reporting</h4>
+                <p>Identifying and analyzing Alerts in a Security Operations Center.Performed alert triage and investigation, distinguishing true positives from false positives and escalating critical incidents with detailed
+                      reports to L2 analysts. Applied SOC workflows, log analysis, and incident documentation to simulate
+                       real-world security operations center duties.</p>
+            </div>
+            <span class="room-badge planned">📋Completed</span>
+        </div>
+        <div class="room-card">
+            <div class="room-info">
+                <h4>Phishing Email Fundamentals</h4>
+                <p>Spam and Phishing remain the most common social engineering threats facing modern organizations.
+                    While spam is often low-risk, phishing can trick users into disclosing sensitive information or unknowingly deploying malware.
+                    A single unsuspecting user who clicks a malicious link or opens an attachment can give an attacker an
+                    initial foothold in the network and cause huge damage to the company..</p>
+            </div>
+            <span class="room-badge planned">📋Completed</span>
+        </div>
+        <!-- ===== JOURNEY / BLOG SECTION ===== -->
+        <div class="journey-section">
+            <h2>My Learning Journey</h2>
+
+            <!-- Entry 1 -->
+            <div class="journey-entry">
+                <div class="entry-header">
+                    <h4>🔐 Started TryHackMe SOC Path</h4>
+                    <span class="entry-date">📅 28 July 2026</span>
+                </div>
+                <div class="entry-content">
+                    <p>Started the SOC Analyst learning path on TryHackMe. Completed the following rooms:</p>
+                    <ul>
+                        <li>Intro to Cybersecurity — learned about threat actors and defense strategies</li>
+                        <li>Network Fundamentals — understood OSI model and TCP/IP</li>
+                        <li>Intro to SIEM — explored SIEM tools and their role in SOC</li>
+                    </ul>
+                    <div class="entry-tags">
+                        <span>#SOC</span>
+                        <span>#SIEM</span>
+                        <span>#Networking</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Entry 2 -->
+            <div class="journey-entry">
+                <div class="entry-header">
+                    <h4>📊 Started Log Analysis Room</h4>
+                    <span class="entry-date">📅 29 July 2026</span>
+                </div>
+                <div class="entry-content">
+                    <p>Currently working on the "Intro to Log Analysis" room. Learning how to analyze logs to detect suspicious activity and investigate security incidents.</p>
+                    <ul>
+                        <li>Understanding log formats and sources</li>
+                        <li>Identifying suspicious patterns in logs</li>
+                        <li>Correlating events to detect threats</li>
+                    </ul>
+                    <div class="entry-tags">
+                        <span>#LogAnalysis</span>
+                        <span>#ThreatHunting</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <a href="index.html#profiles" class="back-btn"><i class="fas fa-arrow-left"></i> Back to Profiles</a>
+
+    </section>
+</main>
+
+<footer>
+    <div class="footer-content">
+        <div class="footer-logo">AS</div>
+        <p>&copy; 2026 Aqib Shakeel. All rights reserved.</p>
+        <div class="footer-links">
+            <a href="index.html">Home</a>
+            <a href="index.html#profiles">Profiles</a>
+            <a href="index.html#contact">Contact</a>
+        </div>
+    </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
