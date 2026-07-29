@@ -33,7 +33,7 @@ header {
     width: 100%;
     top: 0;
     z-index: 1000;
-    background: rgba(13, 13, 13, 0.95);
+    background: rgba(41, 40, 40, 0.95);
     backdrop-filter: blur(10px);
     border-bottom: 1px solid var(--border);
 }
@@ -48,25 +48,33 @@ header {
 }
 
 .logo {
-    font-size: 2rem;
+    font-size: 2.2rem;
     font-weight: 800;
     background: var(--gradient);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    letter-spacing: 1px;
+    white-space: nowrap;
+    flex-shrink: 0;
 }
 
 .nav-links {
     display: flex;
     list-style: none;
-    gap: 2.5rem;
+    gap: 1rem;
+    align-items: center;
+    flex-wrap: nowrap;
 }
 
 .nav-links a {
     text-decoration: none;
     color: var(--text);
     font-weight: 500;
+    font-size: 0.85rem;
     transition: 0.3s;
     position: relative;
+    white-space: nowrap;
+    padding: 0.2rem 0;
 }
 
 .nav-links a::after {
@@ -92,25 +100,89 @@ header {
     display: none;
     flex-direction: column;
     cursor: pointer;
+    gap: 5px;
 }
 
 .hamburger span {
     width: 28px;
     height: 3px;
     background: var(--text);
-    margin: 4px 0;
     border-radius: 2px;
+    transition: 0.3s;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1024px) {
+    .nav-links {
+        gap: 0.8rem;
+    }
+    .nav-links a {
+        font-size: 0.75rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .logo {
+        font-size: 1.8rem;
+    }
+
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: var(--bg);
+        padding: 1.5rem;
+        border-bottom: 1px solid var(--border);
+        gap: 1rem;
+        flex-wrap: wrap;
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    .nav-links a {
+        font-size: 1.1rem;
+        text-align: center;
+        padding: 0.5rem 0;
+        white-space: normal;
+    }
+
+    .hamburger {
+        display: flex;
+    }
+
+    .hamburger.active span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .hamburger.active span:nth-child(2) {
+        opacity: 0;
+    }
+
+    .hamburger.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(5px, -5px);
+    }
+}
+
+@media (max-width: 480px) {
+    .logo {
+        font-size: 1.5rem;
+    }
 }
 
 /* ========== SECTIONS ========== */
 section {
-    padding: 100px 5%;
+    padding: 100px 0%;
     max-width: 1200px;
     margin: 0 auto;
 }
 
 h2 {
-    font-size: 2.8rem;
+    font-size: 2.5rem;
     text-align: center;
     margin-bottom: 3rem;
     background: var(--gradient);
@@ -121,8 +193,8 @@ h2 {
 h2::after {
     content: '';
     display: block;
-    width: 60px;
-    height: 4px;
+    width: 100px;
+    height: 2px;
     background: var(--gradient);
     margin: 0.5rem auto 0;
     border-radius: 2px;
@@ -134,6 +206,7 @@ h2::after {
     display: flex;
     align-items: center;
     padding-top: 80px;
+    justify-content: flex-start;
 }
 
 .hero-content {
@@ -142,11 +215,20 @@ h2::after {
     gap: 4rem;
     align-items: center;
     width: 100%;
+    justify-items: start;
+    text-align: left;
+    margin-left: 0;
+    margin-right: auto;
+}
+
+.hero-text {
+    text-align: left;
 }
 
 .hero-text h1 {
     font-size: 4rem;
     font-weight: 800;
+    text-align: left;
 }
 
 .hero-text h1 span {
@@ -159,17 +241,20 @@ h2::after {
     font-size: 1.4rem;
     color: var(--primary);
     font-weight: 600;
+    text-align: left;
 }
 
 .sub-tagline {
     color: #888;
     margin-bottom: 2rem;
+    text-align: left;
 }
 
 .hero-buttons {
     display: flex;
     gap: 1rem;
     margin-bottom: 2rem;
+    justify-content: flex-start;
 }
 
 .hero-contact {
@@ -177,6 +262,7 @@ h2::after {
     gap: 2rem;
     flex-wrap: wrap;
     color: #aaa;
+    justify-content: flex-start;
 }
 
 .hero-contact i {
@@ -1772,5 +1858,29 @@ footer {
     .image-placeholder {
         width: 180px;
         height: 180px;
+    }
+}
+/* ===== HERO TEXT ===== */
+
+.hero-text h1 {
+    font-size: 4rem;
+    font-weight: 800;
+    white-space: nowrap;  /* ← Forces name in one line */
+    display: inline-block;
+    width: 100%;
+}
+
+/* For smaller screens, allow wrap */
+@media (max-width: 768px) {
+    .hero-text h1 {
+        font-size: 2.8rem;
+        white-space: normal;  /* ← Allow wrap on mobile */
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-text h1 {
+        font-size: 2rem;
+        white-space: normal;
     }
 }
